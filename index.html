@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WhatsApp Link Generator - Free Tools Zone</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+  min-height:100vh;
+  padding:25px 15px;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.header h1{
+  font-size:36px;
+  margin-bottom:8px;
+}
+
+.header p{
+  color:#687386;
+  font-size:16px;
+}
+
+.tool{
+  background:white;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 8px 35px rgba(0,0,0,.08);
+}
+
+.field{
+  margin-bottom:20px;
+}
+
+.field label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+select,
+input,
+textarea{
+  width:100%;
+  padding:14px;
+  border:1px solid #d5dce7;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  background:white;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#5064ff;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.phone-row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:10px;
+}
+
+.generate{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:15px;
+  background:#5064ff;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.generate:hover{
+  opacity:.9;
+}
+
+.result{
+  margin-top:25px;
+  padding:20px;
+  background:#f7f9fc;
+  border-radius:14px;
+  display:none;
+}
+
+.result h2{
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.link-box{
+  display:flex;
+  gap:8px;
+}
+
+.link-box input{
+  flex:1;
+  background:white;
+}
+
+.copy{
+  border:0;
+  padding:0 18px;
+  border-radius:10px;
+  background:#172033;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.open{
+  display:block;
+  text-align:center;
+  margin-top:12px;
+  padding:13px;
+  background:#25D366;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.note{
+  margin-top:20px;
+  color:#687386;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.footer{
+  text-align:center;
+  margin-top:25px;
+  color:#8a94a5;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+
+  .header h1{
+    font-size:28px;
+  }
+
+  .tool{
+    padding:20px;
+  }
+
+  .phone-row{
+    grid-template-columns:1fr;
+  }
+
+  .link-box{
+    flex-direction:column;
+  }
+
+  .copy{
+    padding:13px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+
+    <h1>💬 WhatsApp Link Generator</h1>
+
+    <p>
+      Create a WhatsApp chat link with a pre-filled message.
+    </p>
+
+  </div>
+
+
+  <div class="tool">
+
+    <div class="field">
+
+      <label>Country</label>
+
+      <select id="country">
+
+        <option value="94">
+          🇱🇰 Sri Lanka (+94)
+        </option>
+
+        <option value="91">
+          🇮🇳 India (+91)
+        </option>
+
+        <option value="1">
+          🇺🇸 USA (+1)
+        </option>
+
+        <option value="44">
+          🇬🇧 United Kingdom (+44)
+        </option>
+
+        <option value="61">
+          🇦🇺 Australia (+61)
+        </option>
+
+        <option value="971">
+          🇦🇪 UAE (+971)
+        </option>
+
+        <option value="966">
+          🇸🇦 Saudi Arabia (+966)
+        </option>
+
+        <option value="974">
+          🇶🇦 Qatar (+974)
+        </option>
+
+        <option value="65">
+          🇸🇬 Singapore (+65)
+        </option>
+
+        <option value="60">
+          🇲🇾 Malaysia (+60)
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>WhatsApp Number</label>
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="771234567"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>Message (Optional)</label>
+
+      <textarea
+        id="message"
+        placeholder="Hello! I would like to know more about your product."
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="generate"
+      onclick="generateLink()">
+
+      🔗 Generate WhatsApp Link
+
+    </button>
+
+
+    <div
+      class="result"
+      id="result">
+
+      <h2>Your WhatsApp Link</h2>
+
+      <div class="link-box">
+
+        <input
+          type="text"
+          id="resultLink"
+          readonly
+        >
+
+        <button
+          class="copy"
+          onclick="copyLink()">
+
+          📋 Copy
+
+        </button>
+
+      </div>
+
+
+      <a
+        id="openWhatsApp"
+        class="open"
+        target="_blank">
+
+        🟢 Open WhatsApp
+
+      </a>
+
+    </div>
+
+
+    <div class="note">
+
+      <strong>How it works:</strong><br>
+
+      Enter your WhatsApp number, add an optional message,
+      and click "Generate WhatsApp Link". Share the generated
+      link anywhere you want.
+
+      <br><br>
+
+      <strong>Privacy:</strong><br>
+
+      Your phone number and message are processed directly
+      in your browser and are not uploaded to a server.
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+
+    Free Tools Zone • Free Online Tools
+
+  </div>
+
+</div>
+
+
+<script>
+
+function generateLink(){
+
+  let country =
+    document.getElementById("country").value;
+
+  let phone =
+    document.getElementById("phone").value.trim();
+
+  let message =
+    document.getElementById("message").value.trim();
+
+
+  /*
+    Remove spaces, + signs, brackets,
+    dashes and other symbols.
+  */
+
+  phone =
+    phone.replace(/\D/g,"");
+
+
+  if(!phone){
+
+    alert("Please enter your WhatsApp number.");
+
+    return;
+
+  }
+
+
+  /*
+    If user enters local Sri Lankan number
+    beginning with 0, remove the 0.
+  */
+
+  if(phone.startsWith("0")){
+
+    phone =
+      phone.substring(1);
+
+  }
+
+
+  /*
+    Prevent accidentally adding the country
+    code twice.
+  */
+
+  if(phone.startsWith(country)){
+
+    phone =
+      phone.substring(country.length);
+
+  }
+
+
+  let fullNumber =
+    country + phone;
+
+
+  let link =
+    "https://wa.me/" +
+    fullNumber;
+
+
+  if(message){
+
+    link +=
+      "?text=" +
+      encodeURIComponent(message);
+
+  }
+
+
+  document.getElementById("resultLink").value =
+    link;
+
+
+  document.getElementById("openWhatsApp").href =
+    link;
+
+
+  document.getElementById("result").style.display =
+    "block";
+
+}
+
+
+function copyLink(){
+
+  const input =
+    document.getElementById("resultLink");
+
+
+  navigator.clipboard.writeText(
+    input.value
+  ).then(()=>{
+
+    const button =
+      document.querySelector(".copy");
+
+    button.innerText =
+      "✅ Copied!";
+
+    setTimeout(()=>{
+
+      button.innerText =
+        "📋 Copy";
+
+    },1500);
+
+  });
+
+}
+
+</script>
+
+</body>
+  <style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f0fdf4;
+  color:#123126;
+  min-height:100vh;
+  padding:25px 15px;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.header h1{
+  font-size:36px;
+  margin-bottom:8px;
+  color:#128C7E;
+}
+
+.header p{
+  color:#527064;
+  font-size:16px;
+}
+
+.tool{
+  background:#ffffff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 8px 35px rgba(18,140,126,.12);
+  border:1px solid #d9f5e5;
+}
+
+.field{
+  margin-bottom:20px;
+}
+
+.field label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:8px;
+  color:#174c3b;
+}
+
+select,
+input,
+textarea{
+  width:100%;
+  padding:14px;
+  border:1px solid #cce8da;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  background:#fbfffd;
+  color:#183c31;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#25D366;
+  box-shadow:0 0 0 3px rgba(37,211,102,.12);
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.phone-row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:10px;
+}
+
+.generate{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:15px;
+  background:#25D366;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(37,211,102,.25);
+}
+
+.generate:hover{
+  background:#20bd5a;
+  transform:translateY(-1px);
+}
+
+.result{
+  margin-top:25px;
+  padding:20px;
+  background:#f0fdf4;
+  border:1px solid #d3f4df;
+  border-radius:14px;
+  display:none;
+}
+
+.result h2{
+  font-size:18px;
+  margin-bottom:12px;
+  color:#128C7E;
+}
+
+.link-box{
+  display:flex;
+  gap:8px;
+}
+
+.link-box input{
+  flex:1;
+  background:white;
+}
+
+.copy{
+  border:0;
+  padding:0 18px;
+  border-radius:10px;
+  background:#128C7E;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.copy:hover{
+  background:#0d766b;
+}
+
+.open{
+  display:block;
+  text-align:center;
+  margin-top:12px;
+  padding:13px;
+  background:#25D366;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  box-shadow:0 5px 15px rgba(37,211,102,.2);
+}
+
+.open:hover{
+  background:#20bd5a;
+}
+
+.note{
+  margin-top:20px;
+  color:#527064;
+  font-size:13px;
+  line-height:1.7;
+  padding:15px;
+  background:#f8fffb;
+  border-radius:10px;
+}
+
+.footer{
+  text-align:center;
+  margin-top:25px;
+  color:#6d8b7e;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+
+  .header h1{
+    font-size:28px;
+  }
+
+  .tool{
+    padding:20px;
+  }
+
+  .phone-row{
+    grid-template-columns:1fr;
+  }
+
+  .link-box{
+    flex-direction:column;
+  }
+
+  .copy{
+    padding:13px;
+  }
+
+}
+</style>
+</html>
